@@ -1,0 +1,307 @@
+/*-------------
+ 	General
+-------------*/
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html{
+	font: normal 16px 'Open Sans';
+	color: #555;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
+
+	opacity: 0.9;
+}
+
+a:hover{
+	opacity: 1;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+/*----------------
+ 	Hero Section
+----------------*/
+
+.hero {
+	position: relative;
+	min-height: 100vh;
+	color: #fff;
+	text-align: center;
+	background: linear-gradient(#2c3250, #3d425d);
+	padding: 0;
+}
+
+.hero .background-image {
+	max-width: 55%;
+	max-height: 500px;
+}
+
+.hero .hero-logo {
+	position: absolute;
+	top: 30px;
+	left: 13vw;
+	width: 102px;
+}
+
+.hero .hero-data {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.hero .download-container {
+	flex: 1;
+	margin: 20px 0px;
+	margin-bottom: 40px;
+}
+
+.download-container img {
+	width: 170px;
+}
+
+.download-container a:first-child {
+	margin-right: 20px;
+}
+
+.hero .header-title {
+	flex: 1;
+	font-size: 28px;
+	font-weight: 800;
+	text-align: center;
+	width: 50%;
+	margin: 20px 0px;
+}
+
+.hero .header-subtitle {
+	flex: 1;
+	width: 50%;
+	font-size: 16px;
+	padding: 0px 60px;
+	margin: 20px 0px;
+}
+
+.usage {
+	background-color: #17be9f;
+	display: flex;
+	padding: 0px;
+	min-height: 536px;
+}
+
+.usage .usage-slogan {
+	flex: 1;
+	font-size: 24px;
+	font-weight: 800;
+	color: #f1f1f3;
+	display: flex;
+	align-items: center;
+	margin: 40px;
+	text-align: center;
+}
+
+.usage .usage-steps-container {
+	flex: 1;
+	margin: 0px 11%;
+}
+
+.usage .usage-steps {
+	display: flex;
+	align-items: center;
+	flex: 1;
+}
+
+.usage .usage-steps .usage-text {
+	flex: 4;
+	font-size: 18px;
+	font-weight: 300;
+	color: white;
+	text-align: left;
+}
+
+.usage .usage-steps .usage-icon {
+	flex: 1;
+	margin: 0px 20px ;
+	width: 70px;
+	height: 70px;
+}
+
+.usage .usage-steps .usage-line {
+	background-color: white;
+	height: 1px;
+	width: 70px;
+	margin: 0px 20px;
+}
+
+.features {
+	align-items: flex-start;
+	background: linear-gradient(#ebebf5, #ffffff);
+	padding: 0;
+	color: #282d49;
+}
+
+.features .features-title {
+	font-size: 24px;
+	font-weight: 100;
+	margin-top: 100px;
+	color: #282d49;
+}
+
+.features-container {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.features .features-phone {
+	position: relative;
+	flex: 6;
+}
+
+.features .features-phone img {
+	width: 700px;
+	margin-top: 21px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+.features .features-text-container {
+	flex: 6;
+	padding-right: 20vw;
+	padding-left: 60px;
+}
+
+.features .features-text {
+	font-weight: 300;
+	font-size: 16px;
+}
+
+.features .features-separator {
+	height: 1px;
+	width: 100px;
+	background-color: #282d49;
+	margin: 20px 0px;
+}
+
+.features .download-container {
+	margin-top: 40px;
+}
+
+.features .features-love {
+	display: flex;
+
+	margin: 80px 0px;
+}
+
+.features .features-love img {
+	width: 15px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+
+/*-------------
+ 	Mobile
+-------------*/
+@media (max-width: 600px) {
+	.hero .background-image {
+		content: url(/assets/img/img_phones_mobile.png);
+		margin-top: 70px;
+		width: 100%;
+		max-width: none;
+		max-height: none;
+	}
+
+	.hero .header-title, .hero .header-subtitle {
+		width: 90%;
+		padding: 0px;
+	}
+
+	.hero .header-title {
+		font-size: 20px;
+	}
+
+	.usage {
+		padding-left: 60px;
+		padding-right: 60px;
+	}
+
+	.usage .usage-slogan {
+		font-size: 20px;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	.usage-steps {
+		flex-direction: column;
+		padding-bottom: 40px;
+	}
+
+	.usage .usage-steps-container {
+		margin: 0px;
+	}
+
+	.usage .usage-steps .usage-text {
+		text-align: center;
+		margin: 20px 0px;
+	}
+
+	.usage-line {
+		display: none;
+	}
+
+	.features .features-title {
+		margin-top: 40px;
+	}
+
+	.features .features-phone {
+		display: none;
+	}
+
+	.features .features-text-container {
+		padding: 0px 20px;
+	}
+
+	.features .features-separator {
+		margin: 40px 0px;
+	}
+
+	.features .features-love {
+		margin: 40px 0px;
+	}
+
+	.features .download-container, .hero .download-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.download-container a:first-child {
+		margin-right: 0px;
+	}
+
+	.features .download-container a:first-child, .hero .download-container a:first-child {
+		margin-bottom: 20px;
+	}
+
+	.features .features-love {
+		justify-content: center;
+	}
+
+}
