@@ -25,6 +25,10 @@ a:hover{
 	opacity: 1;
 }
 
+.no-breaking {
+	white-space: nowrap
+}
+
 section {
 	display: flex;
 	flex-direction: column;
