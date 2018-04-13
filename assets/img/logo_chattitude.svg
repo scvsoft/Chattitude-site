@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="182px" height="30px" viewBox="0 0 182 30" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>Chattitude</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Landing" transform="translate(-254.000000, -65.000000)">
+            <g id="Chattitude" transform="translate(253.000000, 54.000000)">
+                <text id="chattitude" font-family="OpenSans-SemiBold, Open Sans" font-size="37" font-weight="500" fill="#FFFFFF">
+                    <tspan x="0" y="40">chattitude</tspan>
+                </text>
+                <circle id="Oval-4" stroke="#2C3250" stroke-width="2" fill="#15B794" cx="156" cy="30" r="4"></circle>
+                <circle id="Oval-4" stroke="#2C3250" stroke-width="2" fill="#EF5350" cx="123" cy="30" r="4"></circle>
+                <circle id="Oval-4" stroke="#2C3250" stroke-width="2" fill="#82D3E0" cx="58" cy="30" r="4"></circle>
+                <circle id="Oval-4" stroke="#2C3250" stroke-width="2" fill="#EDB724" cx="26" cy="30" r="4"></circle>
+            </g>
+        </g>
+    </g>
+</svg>
