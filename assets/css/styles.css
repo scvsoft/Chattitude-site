@@ -540,14 +540,16 @@ summary:focus-visible {
 .step:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 46px;
-  left: calc(50% + 56px);
-  width: calc(100% - 112px + 32px);
+  top: 15px;
+  left: calc(50% + 28px);
+  width: calc(100% - 56px + 32px);
   height: 2px;
   background: rgba(255, 255, 255, 0.35);
 }
 
 .step-num {
+  position: relative;
+  z-index: 2;
   display: grid;
   place-items: center;
   width: 32px;
@@ -560,8 +562,9 @@ summary:focus-visible {
 }
 
 .step img {
-  width: 56px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
+  opacity: 0.85;
 }
 
 .how h2,
@@ -810,7 +813,7 @@ details p {
 }
 
 .step:hover img {
-  transform: translateY(-4px) rotate(-4deg);
+  transform: translateY(-2px);
 }
 
 /* the phones float */
@@ -982,23 +985,6 @@ details[open] p {
   transform: translateY(-2px);
 }
 
-/* ---- 3: the end of the title follows the map ---- */
-/* the title keeps room for its longest version, so nothing below it jumps when it changes */
-.hero h1 {
-  min-height: calc(3 * 1.15em);
-}
-
-.rotator-text {
-  display: inline-block;
-  color: var(--mint);
-  transition: opacity 0.26s ease, transform 0.26s ease;
-}
-
-.rotator-text.is-out {
-  opacity: 0;
-  transform: translateY(-0.3em);
-}
-
 /* ---- 4/5: a dot walks the steps' line; icons react when it reaches them ---- */
 .steps {
   position: relative;
@@ -1007,7 +993,7 @@ details[open] p {
 
 .steps-track {
   position: absolute;
-  top: 46px;
+  top: 16px;
   left: 16.67%;
   right: 16.67%;
   height: 0;
@@ -1032,20 +1018,16 @@ details[open] p {
 .step.is-reached[data-icon='wiggle'] img { animation: icon-wiggle 0.8s ease both; }
 
 @keyframes icon-spin {
-  to { transform: rotate(360deg); }
+  50% { transform: rotate(-10deg) scale(1.06); }
 }
 
 @keyframes icon-bounce {
-  30% { transform: translateY(-14px); }
-  55% { transform: translateY(0); }
-  75% { transform: translateY(-5px); }
+  40% { transform: translateY(-5px); }
 }
 
 @keyframes icon-wiggle {
-  20% { transform: rotate(-12deg); }
-  40% { transform: rotate(10deg); }
-  60% { transform: rotate(-6deg); }
-  80% { transform: rotate(3deg); }
+  30% { transform: rotate(-6deg); }
+  65% { transform: rotate(4deg); }
 }
 
 /* ---- 7/8: use cases "join" as they come in, with a live dot in the chip ---- */
@@ -1269,10 +1251,6 @@ details.is-closing summary::after {
 
   .lead {
     font-size: 17px;
-  }
-
-  .hero h1 {
-    min-height: calc(4 * 1.15em);
   }
 
   .actions .btn {
