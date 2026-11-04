@@ -506,11 +506,28 @@ summary:focus-visible {
   font-weight: 800;
 }
 
-.step img {
-  width: 40px;
-  height: 40px;
-  opacity: 0.85;
+/* each step's icon on a tile in one of the logo's dot colours, drawn in dark blue (the icons are
+   inline SVG in currentColor) */
+.step-icon {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  margin-top: 4px;
+  border-radius: 18px;
+  background: var(--tile);
+  color: var(--blue-900);
+  box-shadow: 0 10px 24px rgba(14, 27, 50, 0.22);
 }
+
+.step-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.step-icon--slack { --tile: var(--dot-yellow); }
+.step-icon--place { --tile: var(--mint); }
+.step-icon--chat { --tile: var(--dot-blue); }
 
 .how h2,
 .step h3 {
@@ -753,11 +770,11 @@ details p {
   transform: scaleX(0);
 }
 
-.step img {
+.step-icon {
   transition: transform 0.3s ease;
 }
 
-.step:hover img {
+.step:hover .step-icon {
   transform: translateY(-2px);
 }
 
@@ -946,9 +963,9 @@ details[open] p {
   z-index: 1;
 }
 
-.step.is-reached[data-icon='spin'] img { animation: icon-spin 0.8s ease both; }
-.step.is-reached[data-icon='bounce'] img { animation: icon-bounce 0.8s ease both; }
-.step.is-reached[data-icon='wiggle'] img { animation: icon-wiggle 0.8s ease both; }
+.step.is-reached[data-icon='spin'] .step-icon { animation: icon-spin 0.8s ease both; }
+.step.is-reached[data-icon='bounce'] .step-icon { animation: icon-bounce 0.8s ease both; }
+.step.is-reached[data-icon='wiggle'] .step-icon { animation: icon-wiggle 0.8s ease both; }
 
 @keyframes icon-spin {
   50% { transform: rotate(-10deg) scale(1.06); }
