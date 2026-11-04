@@ -2,12 +2,22 @@
    logo's four dots; the type is Open Sans, as in the logo, on one scale. */
 
 :root {
-  --navy: #2c3250;
-  --navy-2: #3d425d;
-  --navy-deep: #282d49;
-  --teal: #17be9f;
-  --lavender: #ebebf5;
-  --text: #555;
+  /* Sapphire (the SCV library in Figma): purple-950 as the primary, the greens as the secondary */
+  --purple-950: #321a58;
+  --purple-900: #502887;
+  --purple-100: #efe8fc;
+  --purple-50: #f6f4fe;
+  --green-600: #01a67d; /* brand/primary */
+  --green-500: #0bbe8e;
+  --green-400: #30d9a4;
+  --neutral-600: #535353;
+
+  --navy: var(--purple-950); /* primary dark surfaces */
+  --navy-2: #3b1f66; /* the hero's gradient end: purple-950, a step lighter */
+  --navy-deep: var(--purple-950); /* headings and the footer */
+  --teal: var(--green-500); /* buttons and accents */
+  --lavender: var(--purple-50);
+  --text: var(--neutral-600);
   --white: #fff;
   --on-navy: rgba(255, 255, 255, 0.78);
   /* the logo's dots */
@@ -79,7 +89,7 @@ code {
   font: 600 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
   padding: 1px 6px;
   border-radius: 6px;
-  background: var(--lavender);
+  background: var(--purple-100);
   color: var(--navy-deep);
 }
 
@@ -127,7 +137,7 @@ summary:focus-visible {
 }
 
 .btn--primary:hover {
-  background: #1fd0ae;
+  background: var(--green-400);
 }
 
 .btn--ghost {
@@ -261,17 +271,17 @@ summary:focus-visible {
   width: 100%;
   height: auto;
   border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(10, 12, 30, 0.45);
+  box-shadow: 0 30px 60px rgba(20, 8, 40, 0.5);
 }
 
 .streets path {
-  stroke: #343a5f;
+  stroke: #422c65;
   stroke-width: 10;
   fill: none;
 }
 
 .avenues path {
-  stroke: #3e4570;
+  stroke: #4f3a6f;
   stroke-width: 18;
   fill: none;
 }
@@ -408,7 +418,7 @@ summary:focus-visible {
 
 .how {
   padding: 88px 0;
-  background: var(--teal);
+  background: var(--green-600);
   text-align: center;
 }
 
@@ -438,7 +448,7 @@ summary:focus-visible {
   left: calc(50% + 56px);
   width: calc(100% - 112px + 32px);
   height: 2px;
-  background: rgba(40, 45, 73, 0.25);
+  background: rgba(50, 26, 88, 0.3);
 }
 
 .step-num {
@@ -506,8 +516,8 @@ summary:focus-visible {
   padding: 28px;
   border-radius: var(--radius);
   background: var(--white);
-  border: 1px solid #e3e3ee;
-  box-shadow: 0 10px 30px rgba(44, 50, 80, 0.06);
+  border: 1px solid var(--purple-100);
+  box-shadow: 0 10px 30px rgba(50, 26, 88, 0.06);
 }
 
 .card strong {
@@ -554,7 +564,7 @@ summary:focus-visible {
 }
 
 details {
-  border-bottom: 1px solid #e3e3ee;
+  border-bottom: 1px solid var(--purple-100);
 }
 
 summary {
