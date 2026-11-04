@@ -848,6 +848,78 @@ details[open] p {
   animation: rise 0.35s ease both;
 }
 
+/* the hero's main button: "you're here". A pin drops in from above, bounces, lands, and a ring
+   ripples out from where it lands; the label slides over to make room. Same on keyboard focus. */
+.btn--pin {
+  position: relative;
+  overflow: hidden;
+  padding: 0 30px;
+}
+
+.btn-pin {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  margin-top: -10px;
+  color: var(--blue-900);
+  opacity: 0;
+  transform: translateY(-36px);
+}
+
+.btn-pin svg {
+  display: block;
+}
+
+.btn-ring {
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 16px;
+  height: 6px;
+  margin-left: -8px;
+  border: 2px solid var(--blue-900);
+  border-radius: 50%;
+  opacity: 0;
+}
+
+.btn-label {
+  display: inline-block;
+  transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+
+.btn--pin:hover .btn-pin,
+.btn--pin:focus-visible .btn-pin {
+  animation: pin-drop 0.6s cubic-bezier(0.3, 0.7, 0.4, 1) forwards;
+}
+
+.btn--pin:hover .btn-ring,
+.btn--pin:focus-visible .btn-ring {
+  animation: pin-ring 0.9s 0.45s ease-out forwards;
+}
+
+.btn--pin:hover .btn-label,
+.btn--pin:focus-visible .btn-label {
+  transform: translateX(14px);
+}
+
+.btn--pin:active {
+  transform: translateY(0) scale(0.97);
+}
+
+@keyframes pin-drop {
+  0% { opacity: 0; transform: translateY(-36px); }
+  55% { opacity: 1; transform: translateY(2px); }
+  75% { transform: translateY(-4px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pin-ring {
+  0% { opacity: 0.8; transform: scale(0.4); }
+  100% { opacity: 0; transform: scale(2.6); }
+}
+
 /* ---- scroll reveal (only with JavaScript, never with "reduce motion") ---- */
 
 .js .reveal {
@@ -878,6 +950,12 @@ details[open] p {
 
   html {
     scroll-behavior: auto;
+  }
+
+  .btn--pin:hover .btn-pin,
+  .btn--pin:focus-visible .btn-pin {
+    opacity: 1;
+    transform: none;
   }
 
   .js .reveal,
