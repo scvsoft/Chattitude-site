@@ -485,9 +485,9 @@ summary:focus-visible {
 .step:not(:last-child)::after {
   content: '';
   position: absolute;
-  top: 15px;
-  left: calc(50% + 28px);
-  width: calc(100% - 56px + 32px);
+  top: 35px;
+  left: calc(50% + 44px);
+  width: calc(100% - 88px + 32px);
   height: 2px;
   background: rgba(255, 255, 255, 0.35);
 }
@@ -509,6 +509,8 @@ summary:focus-visible {
 /* each step's icon on a tile in one of the logo's dot colours, drawn in dark blue (the icons are
    inline SVG in currentColor) */
 .step-icon {
+  position: relative;
+  z-index: 2;
   display: grid;
   place-items: center;
   width: 64px;
@@ -943,7 +945,7 @@ details[open] p {
 
 .steps-track {
   position: absolute;
-  top: 16px;
+  top: 36px;
   left: 16.67%;
   right: 16.67%;
   height: 0;
