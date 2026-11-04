@@ -24,7 +24,17 @@
     { x: 130, y: 200 },
   ];
 
+  // the end of the title, for each place ("Slack that knows you're at the office")
+  var PHRASES = {
+    '#home': "you're home",
+    '#office': "you're at the office",
+    '#that-conference': "you're at a conference",
+    '#a-client-site': "you're with a client",
+  };
+  var DEFAULT_PHRASE = 'where you are';
+
   var walker = demo.querySelector('.walker');
+  var rotator = document.querySelector('.rotator-text');
   var list = demo.querySelector('.channels-list');
   var toasts = demo.querySelector('.toasts');
   var route = demo.querySelector('.route');
@@ -43,6 +53,26 @@
     'd',
     ROUTE.map(function (p, i) { return (i ? 'L' : 'M') + p.x + ' ' + p.y; }).join('') + 'Z'
   );
+
+  // ---- the title and the chips above follow the map ----
+
+  var phraseTimer = 0;
+  function setPhrase(text) {
+    if (!rotator || rotator.textContent === text) return;
+    clearTimeout(phraseTimer);
+    rotator.classList.add('is-out');
+    phraseTimer = setTimeout(function () {
+      rotator.textContent = text;
+      rotator.classList.remove('is-out');
+    }, 260);
+  }
+
+  function lightChip(place, on) {
+    var chip = document.querySelector('.lead .chip[data-channel="' + place.channel + '"]');
+    if (!chip) return;
+    chip.style.setProperty('--c', getComputedStyle(place.el).getPropertyValue('--c'));
+    chip.classList.toggle('is-live', on);
+  }
 
   // ---- notifications and the channel list ----
 
@@ -78,6 +108,8 @@
     list.appendChild(li);
     requestAnimationFrame(function () { li.classList.add('is-in'); });
     toast('joined', place.channel);
+    setPhrase(PHRASES[place.channel] || DEFAULT_PHRASE);
+    lightChip(place, true);
   }
 
   function leave(place) {
@@ -89,6 +121,9 @@
       setTimeout(function () { li.remove(); }, 450);
     }
     toast('left', place.channel);
+    lightChip(place, false);
+    // between places, the title goes back to "where you are"
+    if (!places.some(function (p) { return p !== place && p.inside; })) setPhrase(DEFAULT_PHRASE);
   }
 
   // start from a clean slate: the HTML's still moment is replaced by the live one
