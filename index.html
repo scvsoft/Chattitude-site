@@ -1,111 +1,252 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Chattitude</title>
+    <title>Chattitude · Slack that knows where you are</title>
+    <meta name="description" content="Chattitude joins and leaves Slack channels for you as you arrive at and leave the places you choose.">
 
-  	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,800" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.5.2/animate.min.css">
+    <!-- link previews (Slack, LinkedIn, WhatsApp…) -->
+    <meta property="og:title" content="Chattitude · Slack that knows where you are">
+    <meta property="og:description" content="Join and leave Slack channels automatically as you arrive at and leave places.">
+    <meta property="og:image" content="https://chattitude.scvsoft.com/assets/img/img_phones.png">
+    <meta property="og:url" content="https://chattitude.scvsoft.com/">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="assets/css/styles.css?cache=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.js"></script>
-              <script>
-              new WOW({
-                offset: 100
-              }).init();
-              </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css?cache=2">
+    <!-- the page works without JavaScript; with it, sections fade in as they scroll into view -->
+    <script>document.documentElement.classList.add('js')</script>
   </head>
 
   <body>
-  	<section class="hero">
-      <img class="hero-logo" src="assets/img/logo_chattitude.svg" />
-  		<img class="background-image wow fadeInDown" src="assets/img/img_phones.png" />
-      <div class="hero-data">
-        <div class="header-title">Make your Slack activity geo-relevant using nothing but your phone</div>
-        <div class="header-subtitle">Whether you are arriving to the <span class="no-breaking">#office</span>, just came back <span class="no-breaking">#home</span>, attending <span class="no-breaking">#that-conference</span> or on-site with <span class="no-breaking">#a-particular-customer</span>, Chattitude helps you stay in the right channels for your current location</div>
-        <div class="download-container">
-          <a href="https://play.google.com/store/apps/details?id=com.scvsoft.chattitude">
-            <img src="assets/img/logo_google_play.svg" />
-          </a>
-          <a href="https://itunes.apple.com/us/app/chattitude/id1370500217">
-            <img src="assets/img/logo_app_store.svg" />
-          </a>
-        </div>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="#" class="logo"><!-- inline, so the wordmark uses Open Sans (an <img> SVG can't use web fonts) --><svg class="wordmark" viewBox="0 0 182 30" width="122" height="20" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#2c3250" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg></a>
+        <nav class="nav" aria-label="Main">
+          <a href="#how">How it works</a>
+          <a href="#uses">Use cases</a>
+          <a href="#faq">FAQ</a>
+          <a href="#notify" class="btn btn--small btn--primary">Get notified</a>
+        </nav>
       </div>
-    </section>
+    </header>
 
-    <section class="usage">
-      <div class="usage-slogan">
-        <span>Chattitude is really simple to use</span>
-      </div>
-      <div class="usage-steps-container">
-        <div class="usage-steps">
-          <img class="usage-icon wow fadeInUp" data-wow-durationa="2s" src="assets/img/ic_slack.svg" />
-          <span class="usage-text">Link your Slack account</span>
-
-          <div class="usage-line"></div>
-
-          <img class="usage-icon wow fadeInUp" src="assets/img/ic_locations.svg" />
-          <span class="usage-text">Associate locations to channels</span>
-
-          <div class="usage-line"></div>
-
-          <img class="usage-icon wow fadeInUp" src="assets/img/ic_channels.svg" />
-          <span class="usage-text">Join/Leave channels as you Enter/Exit locations</span>
-        </div>
-      </div>
-    </section>
-
-  	<section class="features">
-      <div class="features-container">
-        <div class="features-phone"></div>
-        <div class="features-text-container features-title">
-          What can you do with Chattitude?
-        </div>
-      </div>
-      <div class="features-container">
-        <div class="features-phone">
-          <img class="features-phone wow fadeInLeft"  src="assets/img/img_phone.png" />
-        </div>
-        <div class="features-text-container">
-
-          <div class="features-separator"></div>
-          <div class="features-text">
-            <span class="bold">Have an <span class="no-breaking">#office</span> channel?</span>
-            <br/>
-  Configure it so your team joins and leaves it as they enter/leave the office. Looking for someone who is at the office now becomes just issuing /who on the <span class="no-breaking">#office</span> channel. Ideal for remote-friendly companies.
+    <main>
+      <!-- ============ hero ============ -->
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">For Slack teams</p>
+            <h1>Slack that knows where you are</h1>
+            <p class="lead">
+              Chattitude joins and leaves channels for you as you arrive and leave:
+              <span class="chip">#office</span> <span class="chip">#home</span>
+              <span class="chip">#that-conference</span> <span class="chip">#a-client-site</span>
+            </p>
+            <div class="actions">
+              <a href="#notify" class="btn btn--primary">Get notified when it's back</a>
+              <a href="#how" class="btn btn--ghost">See how it works</a>
+            </div>
+            <p class="note">[Coming back to iOS and Android: date to confirm]</p>
           </div>
 
-          <div class="features-separator"></div>
-          <div class="features-text">
-            <span class="bold">Are you with a team at a big, multi-location, CES-like event?</span>
-            <br />
-            Those may get crazy and sometimes is hard to know who was where... create channels for the different locations and make sure you always reach the people that is at the right place.
-          </div>
+          <!-- The idea in one loop: you walk into the place, Chattitude adds you to its channel; you
+               walk out, it takes you out. Drawn in SVG + CSS; still with "reduce motion". -->
+          <figure class="demo" aria-label="Animation: a person walks into the SCV Office area and joins #office, then walks out and leaves it.">
+            <svg class="map" viewBox="0 0 480 400" aria-hidden="true">
+              <defs>
+                <clipPath id="map-clip"><rect width="480" height="400" rx="24"/></clipPath>
+              </defs>
+              <g clip-path="url(#map-clip)">
+                <rect width="480" height="400" fill="#262b47"/>
+                <!-- streets, like the app's map -->
+                <g class="streets" transform="rotate(-24 240 200)">
+                  <path d="M-200 40H700M-200 110H700M-200 175H700M-200 250H700M-200 320H700M-200 390H700M-200 460H700"/>
+                  <path d="M-40 -200V600M50 -200V600M130 -200V600M215 -200V600M300 -200V600M380 -200V600M465 -200V600M550 -200V600"/>
+                </g>
+                <g class="avenues" transform="rotate(-24 240 200)">
+                  <path d="M-200 212H700M255 -200V600"/>
+                </g>
+                <!-- the place: its area and pin -->
+                <circle class="zone" cx="250" cy="200" r="80"/>
+                <circle class="zone-ring" cx="250" cy="200" r="80"/>
+                <g class="pin" transform="translate(250 200)">
+                  <path d="M0 0c-9-12-14-20-14-27a14 14 0 0 1 28 0c0 7-5 15-14 27z" fill="#EF5350"/>
+                  <circle cx="0" cy="-27" r="5" fill="#262b47"/>
+                </g>
+                <g class="place-label" transform="translate(250 102)">
+                  <rect x="-48" y="-14" width="96" height="26" rx="13"/>
+                  <text y="4" text-anchor="middle">SCV Office</text>
+                </g>
+                <!-- you -->
+                <g class="walker">
+                  <circle class="walker-pulse" r="16"/>
+                  <circle class="walker-dot" r="8"/>
+                </g>
+              </g>
+            </svg>
 
-          <div class="features-separator"></div>
-          <div class="features-text">
-            <span class="bold">Have a lot of interesting or funny channels on your organization, but don't want those to clutter your phone when you are out? </span>
-            <br />
-  Set up a custom, smarter tune-off by leaving automatically all those channels as you leave your workplace.
+            <!-- Slack-style notifications, in time with the walk -->
+            <div class="toast toast--join" aria-hidden="true">
+              <span class="toast-icon"><img src="assets/img/favicon.svg" alt="" width="32" height="32"></span>
+              <span class="toast-body">
+                <span class="toast-title">Chattitude <span class="toast-time">now</span></span>
+                <span class="toast-text">You joined <strong>#office</strong></span>
+              </span>
+            </div>
+            <div class="toast toast--leave" aria-hidden="true">
+              <span class="toast-icon"><img src="assets/img/favicon.svg" alt="" width="32" height="32"></span>
+              <span class="toast-body">
+                <span class="toast-title">Chattitude <span class="toast-time">now</span></span>
+                <span class="toast-text">You left <strong>#office</strong></span>
+              </span>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <!-- ============ how it works ============ -->
+      <section class="how" id="how">
+        <div class="container">
+          <h2>Simple to set up</h2>
+          <ol class="steps">
+            <li class="step reveal">
+              <span class="step-num">1</span>
+              <img src="assets/img/ic_slack.svg" alt="" width="56" height="56">
+              <h3>Link your Slack account</h3>
+              <p>Sign in with Slack from the app.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step-num">2</span>
+              <img src="assets/img/ic_locations.svg" alt="" width="56" height="56">
+              <h3>Pair places with channels</h3>
+              <p>Mark a place on the map and pick its channels.</p>
+            </li>
+            <li class="step reveal">
+              <span class="step-num">3</span>
+              <img src="assets/img/ic_channels.svg" alt="" width="56" height="56">
+              <h3>Walk in, walk out</h3>
+              <p>Chattitude joins and leaves the channels for you.</p>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ the app ============ -->
+      <section class="app">
+        <div class="container app-inner">
+          <div class="app-copy reveal">
+            <h2>Your places, your channels</h2>
+            <p>Mark a place on the map, choose the channels that belong there, and let your phone do the rest.</p>
           </div>
-          <div class="download-container">
-            <a href="https://play.google.com/store/apps/details?id=com.scvsoft.chattitude">
-              <img src="assets/img/logo_google_play.svg" />
-            </a>
-            <a href="https://itunes.apple.com/us/app/chattitude/id1370500217">
-              <img src="assets/img/logo_app_store.svg" />
-            </a>
-          </div>
-          <div class="features-love">
-            Made with&nbsp;<img src="assets/img/ic_love.svg" />&nbsp;by&nbsp;<a href="http://www.scvsoft.com"><span class="bold">SCVsoft</span></a>
+          <picture class="app-shot reveal">
+            <source srcset="assets/img/img_phones_mobile.webp" media="(max-width: 600px)" type="image/webp">
+            <source srcset="assets/img/img_phones.webp" type="image/webp">
+            <img src="assets/img/img_phones.png" alt="Chattitude on three phones: the welcome screen with Sign in with Slack, a map of saved places, and the channels for SCV Office." width="1508" height="910" loading="lazy">
+          </picture>
+        </div>
+      </section>
+
+      <!-- ============ use cases ============ -->
+      <section class="uses" id="uses">
+        <div class="container">
+          <h2>What you can do with it</h2>
+          <div class="cards">
+            <article class="card reveal">
+              <span class="chip chip--dark">#office</span>
+              <h3>See who's in today</h3>
+              <p>Your team joins <strong>#office</strong> when they arrive and leaves when they go. Type <code>/who</code> in the channel to see who's around. Ideal for remote-friendly teams.</p>
+            </article>
+            <article class="card reveal">
+              <span class="chip chip--dark">#ces-booth</span>
+              <h3>Find your team at big events</h3>
+              <p>At a large, multi-venue event, give each place its own channel and always reach the people who are actually there.</p>
+            </article>
+            <article class="card reveal">
+              <span class="chip chip--dark">#random</span>
+              <h3>Leave the noise at work</h3>
+              <p>Fun but busy channels leave your phone when you leave work, and come back when you return.</p>
+            </article>
           </div>
         </div>
-      </div>
-  	</section>
+      </section>
 
+      <!-- ============ privacy ============ -->
+      <section class="privacy" id="privacy">
+        <div class="container privacy-inner reveal">
+          <svg class="privacy-icon" viewBox="0 0 24 24" width="40" height="40" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+          <div>
+            <h2>What happens with your location</h2>
+            <p>[To confirm from the app's code before publishing: where the location is processed, whether it ever leaves the phone, and what Chattitude can see in Slack.]</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ FAQ ============ -->
+      <section class="faq" id="faq">
+        <div class="container faq-inner">
+          <h2>Questions</h2>
+          <details>
+            <summary>Which chat apps does it work with?</summary>
+            <p>Slack, for now.</p>
+          </details>
+          <details>
+            <summary>Is it on iOS and Android?</summary>
+            <p>Yes, both. [Release date to confirm.]</p>
+          </details>
+          <details>
+            <summary>Does it drain my battery?</summary>
+            <p>[Answer to confirm: it uses the phone's built-in geofencing rather than tracking you all the time.]</p>
+          </details>
+          <details>
+            <summary>How close do I need to be to a place?</summary>
+            <p>[Answer to confirm: the default radius, and whether it can be changed per place.]</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- ============ notify ============ -->
+      <section class="notify" id="notify">
+        <div class="container notify-inner reveal">
+          <h2>Chattitude is coming back</h2>
+          <p>We're bringing it back to the App Store and Google Play. Want to know when it's ready?</p>
+          <a href="#" class="btn btn--primary">[Get notified: sign-up link to decide]</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <svg class="wordmark" viewBox="0 0 182 30" width="110" height="18" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#2c3250" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg>
+        <p>Made with <img src="assets/img/ic_love.svg" alt="love" width="14" height="14"> by <a href="https://www.scvsoft.com">SCVsoft</a></p>
+        <nav class="footer-links" aria-label="Footer">
+          <a href="#privacy">[Privacy policy: link to the real policy]</a>
+        </nav>
+      </div>
+    </footer>
+
+    <script>
+      // fade sections in as they scroll into view (the CSS skips it with "reduce motion")
+      (function () {
+        var items = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+          items.forEach(function (el) { el.classList.add('is-visible'); });
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { rootMargin: '0px 0px -10% 0px' });
+        items.forEach(function (el) { io.observe(el); });
+      })();
+    </script>
   </body>
-
 </html>
