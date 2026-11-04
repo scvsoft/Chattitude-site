@@ -25,7 +25,6 @@
   ];
 
   var walker = demo.querySelector('.walker');
-  var list = demo.querySelector('.channels-list');
   var toasts = demo.querySelector('.toasts');
   var route = demo.querySelector('.route');
   var places = Array.prototype.map.call(demo.querySelectorAll('.place'), function (el) {
@@ -44,16 +43,7 @@
     ROUTE.map(function (p, i) { return (i ? 'L' : 'M') + p.x + ' ' + p.y; }).join('') + 'Z'
   );
 
-  // ---- the hero's chips light up with the map ----
-
-  function lightChip(place, on) {
-    var chip = document.querySelector('.lead .chip[data-channel="' + place.channel + '"]');
-    if (!chip) return;
-    chip.style.setProperty('--c', getComputedStyle(place.el).getPropertyValue('--c'));
-    chip.classList.toggle('is-live', on);
-  }
-
-  // ---- notifications and the channel list ----
+  // ---- notifications ----
 
   function toast(verb, channel) {
     var el = document.createElement('div');
@@ -80,30 +70,15 @@
 
   function join(place) {
     place.el.classList.add('is-in');
-    var li = document.createElement('li');
-    li.className = 'ch ch--place';
-    li.dataset.channel = place.channel;
-    li.textContent = place.channel;
-    list.appendChild(li);
-    requestAnimationFrame(function () { li.classList.add('is-in'); });
     toast('joined', place.channel);
-    lightChip(place, true);
   }
 
   function leave(place) {
     place.el.classList.remove('is-in');
-    var li = list.querySelector('.ch--place[data-channel="' + place.channel + '"]');
-    if (li) {
-      li.classList.remove('is-in');
-      li.classList.add('is-out');
-      setTimeout(function () { li.remove(); }, 450);
-    }
     toast('left', place.channel);
-    lightChip(place, false);
   }
 
   // start from a clean slate: the HTML's still moment is replaced by the live one
-  Array.prototype.forEach.call(list.querySelectorAll('.ch--place'), function (li) { li.remove(); });
   toasts.innerHTML = '';
   places.forEach(function (p) { p.el.classList.remove('is-in'); });
 

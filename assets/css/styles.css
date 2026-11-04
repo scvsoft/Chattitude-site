@@ -57,7 +57,7 @@ h3 {
 }
 
 h1 {
-  font-size: clamp(40px, 6vw, 64px);
+  font-size: clamp(36px, 4.4vw, 54px);
   font-weight: 800;
   letter-spacing: -0.02em;
 }
@@ -222,9 +222,9 @@ summary:focus-visible {
 
 .hero-inner {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
+  grid-template-columns: 1fr 1fr;
   align-items: center;
-  gap: 56px;
+  gap: 72px;
 }
 
 .eyebrow {
@@ -242,9 +242,9 @@ summary:focus-visible {
 
 .lead {
   margin-top: 24px;
-  max-width: 34em;
+  max-width: 30em;
   font-size: 19px;
-  line-height: 1.8;
+  line-height: 1.6;
 }
 
 .actions {
@@ -339,6 +339,15 @@ summary:focus-visible {
   100% { transform: scale(1.25); opacity: 0; }
 }
 
+.place-label {
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+}
+
+.place.is-in .place-label {
+  opacity: 1;
+}
+
 .place-label rect {
   fill: rgba(255, 255, 255, 0.12);
   transition: fill 0.3s ease;
@@ -385,77 +394,13 @@ summary:focus-visible {
   to { transform: scale(1.6); opacity: 0; }
 }
 
-/* the channel list, hanging off the map's left edge */
-.channels {
-  position: absolute;
-  left: -28px;
-  bottom: 36px;
-  width: 176px;
-  padding: 14px 16px;
-  border-radius: 14px;
-  background: var(--white);
-  box-shadow: 0 16px 40px rgba(4, 10, 24, 0.35);
-}
-
-.channels-title {
-  margin-bottom: 6px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #888;
-}
-
-.channels-list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ch {
-  font-size: 14px;
-  line-height: 26px;
-  color: #666;
-  overflow: hidden;
-}
-
-/* place channels slide in, highlighted, then settle; leaving, they fold away */
-.ch--place {
-  max-height: 0;
-  opacity: 0;
-  transform: translateX(-8px);
-  font-weight: 700;
-  color: var(--blue-900);
-  transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease, background-color 1.2s ease;
-}
-
-.ch--place.is-in {
-  max-height: 26px;
-  opacity: 1;
-  transform: none;
-  margin: 0 -8px;
-  padding: 0 8px;
-  border-radius: 6px;
-  animation: new-channel 1.6s ease;
-}
-
-.ch--place.is-out {
-  max-height: 0;
-  opacity: 0;
-}
-
-@keyframes new-channel {
-  0%, 40% { background: rgba(48, 217, 164, 0.3); }
-  100% { background: transparent; }
-}
-
 /* notifications hang off the map's bottom edge, newest last */
 .toasts {
   position: absolute;
   right: 20px;
   bottom: -28px;
   display: grid;
-  width: min(280px, calc(100% - 200px));
+  width: min(280px, calc(100% - 40px));
 }
 
 .toast {
@@ -973,18 +918,6 @@ details[open] p {
   opacity: 1;
 }
 
-/* ---- 2: the hero's chips light up with the place on the map ---- */
-.lead .chip {
-  transition: transform 0.2s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.lead .chip.is-live {
-  background: var(--c);
-  color: var(--blue-1000);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--c) 30%, transparent);
-  transform: translateY(-2px);
-}
-
 /* ---- 4/5: a dot walks the steps' line; icons react when it reaches them ---- */
 .steps {
   position: relative;
@@ -1212,17 +1145,10 @@ details.is-closing summary::after {
 }
 
 @media (max-width: 640px) {
-  .channels {
-    left: 12px;
-    bottom: 12px;
-    width: 140px;
-    padding: 10px 12px;
-  }
-
   .toasts {
     right: 12px;
     bottom: -24px;
-    width: calc(100% - 172px);
+    width: calc(100% - 24px);
   }
 
   .toast {
