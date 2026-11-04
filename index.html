@@ -25,7 +25,7 @@
   <body>
     <header class="site-header">
       <div class="container header-inner">
-        <a href="#" class="logo"><!-- inline, so the wordmark uses Open Sans (an <img> SVG can't use web fonts) --><svg class="wordmark" viewBox="0 0 182 30" width="122" height="20" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#321a58" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg></a>
+        <a href="#" class="logo"><!-- inline, so the wordmark uses Open Sans (an <img> SVG can't use web fonts) --><svg class="wordmark" viewBox="0 0 182 30" width="122" height="20" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#172e53" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg></a>
         <nav class="nav" aria-label="Main">
           <a href="#how">How it works</a>
           <a href="#uses">Use cases</a>
@@ -54,56 +54,78 @@
             <p class="note">[Coming back to iOS and Android: date to confirm]</p>
           </div>
 
-          <!-- The idea in one loop: you walk into the place, Chattitude adds you to its channel; you
-               walk out, it takes you out. Drawn in SVG + CSS; still with "reduce motion". -->
-          <figure class="demo" aria-label="Animation: a person walks into the SCV Office area and joins #office, then walks out and leaves it.">
-            <svg class="map" viewBox="0 0 480 400" aria-hidden="true">
+          <!-- The idea, with four places: someone walks between home, the office, a conference and a
+               client site. Entering a place's area joins its channel; leaving it, leaves. The route and
+               the enter/leave checks run in assets/js/demo.js; without JavaScript (or with "reduce
+               motion") it shows one still moment: at the office, in #office. -->
+          <figure class="demo" aria-label="Animation: a person walks between home, the office, a conference and a client site. Arriving at each place joins its Slack channel, and leaving it leaves the channel.">
+            <svg class="map" viewBox="0 0 520 420" aria-hidden="true">
               <defs>
-                <clipPath id="map-clip"><rect width="480" height="400" rx="24"/></clipPath>
+                <clipPath id="map-clip"><rect width="520" height="420" rx="24"/></clipPath>
               </defs>
               <g clip-path="url(#map-clip)">
-                <rect width="480" height="400" fill="#2a164b"/>
-                <!-- streets, like the app's map -->
-                <g class="streets" transform="rotate(-24 240 200)">
-                  <path d="M-200 40H700M-200 110H700M-200 175H700M-200 250H700M-200 320H700M-200 390H700M-200 460H700"/>
-                  <path d="M-40 -200V600M50 -200V600M130 -200V600M215 -200V600M300 -200V600M380 -200V600M465 -200V600M550 -200V600"/>
+                <rect class="map-bg" width="520" height="420"/>
+                <g class="streets" transform="rotate(-24 260 210)">
+                  <path d="M-200 30H760M-200 100H760M-200 170H760M-200 245H760M-200 315H760M-200 390H760M-200 460H760"/>
+                  <path d="M-60 -200V640M30 -200V640M115 -200V640M200 -200V640M285 -200V640M370 -200V640M455 -200V640M540 -200V640M620 -200V640"/>
                 </g>
-                <g class="avenues" transform="rotate(-24 240 200)">
-                  <path d="M-200 212H700M255 -200V600"/>
+                <g class="avenues" transform="rotate(-24 260 210)">
+                  <path d="M-200 205H760M330 -200V640"/>
                 </g>
-                <!-- the place: its area and pin -->
-                <circle class="zone" cx="250" cy="200" r="80"/>
-                <circle class="zone-ring" cx="250" cy="200" r="80"/>
-                <g class="pin" transform="translate(250 200)">
-                  <path d="M0 0c-9-12-14-20-14-27a14 14 0 0 1 28 0c0 7-5 15-14 27z" fill="#EF5350"/>
-                  <circle cx="0" cy="-27" r="5" fill="#2a164b"/>
+                <!-- the route, faint, and the part already walked -->
+                <path class="route" d=""/>
+
+                <g class="place" data-channel="#home" data-x="95" data-y="105" data-r="44" style="--c:#edb724">
+                  <circle class="zone" cx="95" cy="105" r="44"/>
+                  <circle class="zone-ring" cx="95" cy="105" r="44"/>
+                  <g class="place-label" transform="translate(95 47)"><rect x="-26" y="-13" width="52" height="24" rx="12"/><text y="4" text-anchor="middle">Home</text></g>
+                  <circle class="place-dot" cx="95" cy="105" r="6"/>
                 </g>
-                <g class="place-label" transform="translate(250 102)">
-                  <rect x="-48" y="-14" width="96" height="26" rx="13"/>
-                  <text y="4" text-anchor="middle">SCV Office</text>
+                <g class="place" data-channel="#office" data-x="255" data-y="215" data-r="54" style="--c:#ef5350">
+                  <circle class="zone" cx="255" cy="215" r="54"/>
+                  <circle class="zone-ring" cx="255" cy="215" r="54"/>
+                  <g class="place-label" transform="translate(255 147)"><rect x="-44" y="-13" width="88" height="24" rx="12"/><text y="4" text-anchor="middle">SCV Office</text></g>
+                  <circle class="place-dot" cx="255" cy="215" r="6"/>
                 </g>
-                <!-- you -->
-                <g class="walker">
+                <g class="place" data-channel="#that-conference" data-x="430" data-y="100" data-r="50" style="--c:#82d3e0">
+                  <circle class="zone" cx="430" cy="100" r="50"/>
+                  <circle class="zone-ring" cx="430" cy="100" r="50"/>
+                  <g class="place-label" transform="translate(430 36)"><rect x="-44" y="-13" width="88" height="24" rx="12"/><text y="4" text-anchor="middle">Conference</text></g>
+                  <circle class="place-dot" cx="430" cy="100" r="6"/>
+                </g>
+                <g class="place" data-channel="#a-client-site" data-x="415" data-y="320" data-r="46" style="--c:#30d9a4">
+                  <circle class="zone" cx="415" cy="320" r="46"/>
+                  <circle class="zone-ring" cx="415" cy="320" r="46"/>
+                  <g class="place-label" transform="translate(415 260)"><rect x="-40" y="-13" width="80" height="24" rx="12"/><text y="4" text-anchor="middle">Client site</text></g>
+                  <circle class="place-dot" cx="415" cy="320" r="6"/>
+                </g>
+
+                <g class="walker" transform="translate(255 222)">
                   <circle class="walker-pulse" r="16"/>
                   <circle class="walker-dot" r="8"/>
                 </g>
               </g>
             </svg>
 
-            <!-- Slack-style notifications, in time with the walk -->
-            <div class="toast toast--join" aria-hidden="true">
-              <span class="toast-icon"><img src="assets/img/favicon.svg" alt="" width="32" height="32"></span>
-              <span class="toast-body">
-                <span class="toast-title">Chattitude <span class="toast-time">now</span></span>
-                <span class="toast-text">You joined <strong>#office</strong></span>
-              </span>
+            <!-- a Slack-like channel list: the place channels come and go -->
+            <div class="channels" aria-hidden="true">
+              <p class="channels-title">Channels</p>
+              <ul class="channels-list">
+                <li class="ch ch--fixed">#general</li>
+                <li class="ch ch--fixed">#random</li>
+                <li class="ch ch--place is-in" data-channel="#office">#office</li>
+              </ul>
             </div>
-            <div class="toast toast--leave" aria-hidden="true">
-              <span class="toast-icon"><img src="assets/img/favicon.svg" alt="" width="32" height="32"></span>
-              <span class="toast-body">
-                <span class="toast-title">Chattitude <span class="toast-time">now</span></span>
-                <span class="toast-text">You left <strong>#office</strong></span>
-              </span>
+
+            <!-- notifications, newest at the bottom -->
+            <div class="toasts" aria-hidden="true">
+              <div class="toast is-shown">
+                <span class="toast-icon"><img src="assets/img/favicon.svg" alt="" width="32" height="32"></span>
+                <span class="toast-body">
+                  <span class="toast-title">Chattitude <span class="toast-time">now</span></span>
+                  <span class="toast-text">You joined <strong>#office</strong></span>
+                </span>
+              </div>
             </div>
           </figure>
         </div>
@@ -221,7 +243,7 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <svg class="wordmark" viewBox="0 0 182 30" width="110" height="18" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#321a58" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg>
+        <svg class="wordmark" viewBox="0 0 182 30" width="110" height="18" role="img" aria-label="Chattitude"><text x="-1" y="29" font-family="'Open Sans', sans-serif" font-size="37" font-weight="600" fill="#fff">chattitude</text><g stroke="#172e53" stroke-width="2"><circle cx="155" cy="19" r="4" fill="#15B794"/><circle cx="122" cy="19" r="4" fill="#EF5350"/><circle cx="57" cy="19" r="4" fill="#82D3E0"/><circle cx="25" cy="19" r="4" fill="#EDB724"/></g></svg>
         <p>Made with <img src="assets/img/ic_love.svg" alt="love" width="14" height="14"> by <a href="https://www.scvsoft.com">SCVsoft</a></p>
         <nav class="footer-links" aria-label="Footer">
           <a href="#privacy">[Privacy policy: link to the real policy]</a>
@@ -229,6 +251,7 @@
       </div>
     </footer>
 
+    <script src="assets/js/demo.js" defer></script>
     <script>
       // fade sections in as they scroll into view (the CSS skips it with "reduce motion")
       (function () {

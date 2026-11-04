@@ -2,24 +2,25 @@
    logo's four dots; the type is Open Sans, as in the logo, on one scale. */
 
 :root {
-  /* Sapphire (the SCV library in Figma): purple-950 as the primary, the greens as the secondary */
-  --purple-950: #321a58;
-  --purple-900: #502887;
-  --purple-100: #efe8fc;
-  --purple-50: #f6f4fe;
-  --green-600: #01a67d; /* brand/primary */
-  --green-500: #0bbe8e;
-  --green-400: #30d9a4;
+  /* Emerald's blue (tertiary) as the primary, Sapphire's mint (green-400) as the accent */
+  --blue-1000: #0e1b32; /* Emerald tertiary1000 */
+  --blue-900: #172e53; /* Emerald tertiary900 */
+  --blue-800: #244883; /* Emerald tertiary800 */
+  --blue-600: #376ec7; /* Emerald tertiary600 */
+  --blue-100: #e6eefc; /* Emerald tertiary100 */
+  --blue-50: #f7fafe; /* Emerald tertiary50 */
+  --mint: #30d9a4; /* Sapphire green-400 */
+  --mint-hover: #88eac9; /* Sapphire green-300 */
   --neutral-600: #535353;
 
-  --navy: var(--purple-950); /* primary dark surfaces */
-  --navy-2: #3b1f66; /* the hero's gradient end: purple-950, a step lighter */
-  --navy-deep: var(--purple-950); /* headings and the footer */
-  --teal: var(--green-500); /* buttons and accents */
-  --lavender: var(--purple-50);
+  --navy: var(--blue-900); /* dark surfaces */
+  --navy-2: #1d3a68; /* the hero's gradient end: tertiary900, a step lighter */
+  --navy-deep: var(--blue-900); /* headings */
+  --teal: var(--mint); /* buttons and accents */
+  --lavender: var(--blue-50);
   --text: var(--neutral-600);
   --white: #fff;
-  --on-navy: rgba(255, 255, 255, 0.78);
+  --on-navy: rgba(255, 255, 255, 0.8);
   /* the logo's dots */
   --dot-yellow: #edb724;
   --dot-blue: #82d3e0;
@@ -89,7 +90,7 @@ code {
   font: 600 0.9em ui-monospace, SFMono-Regular, Menlo, monospace;
   padding: 1px 6px;
   border-radius: 6px;
-  background: var(--purple-100);
+  background: var(--blue-100);
   color: var(--navy-deep);
 }
 
@@ -137,7 +138,7 @@ summary:focus-visible {
 }
 
 .btn--primary:hover {
-  background: var(--green-400);
+  background: var(--mint-hover);
 }
 
 .btn--ghost {
@@ -259,11 +260,11 @@ summary:focus-visible {
   color: rgba(255, 255, 255, 0.55);
 }
 
-/* ---- the animation ---- */
+/* ---- the animation (assets/js/demo.js moves it) ---- */
 
 .demo {
   position: relative;
-  margin: 0;
+  margin: 0 0 40px;
 }
 
 .map {
@@ -271,78 +272,112 @@ summary:focus-visible {
   width: 100%;
   height: auto;
   border-radius: 24px;
-  box-shadow: 0 30px 60px rgba(20, 8, 40, 0.5);
+  box-shadow: 0 30px 60px rgba(4, 10, 24, 0.5);
+}
+
+.map-bg {
+  fill: #11233f;
 }
 
 .streets path {
-  stroke: #422c65;
+  stroke: #20365c;
   stroke-width: 10;
   fill: none;
 }
 
 .avenues path {
-  stroke: #4f3a6f;
+  stroke: #2a4370;
   stroke-width: 18;
   fill: none;
 }
 
-.zone {
-  fill: var(--dot-red);
-  fill-opacity: 0.1;
-  animation: zone 9s infinite;
+.route {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.22);
+  stroke-width: 2;
+  stroke-dasharray: 2 7;
+  stroke-linecap: round;
+  animation: route-march 1.2s linear infinite;
 }
 
-.zone-ring {
+@keyframes route-march {
+  to { stroke-dashoffset: -9; }
+}
+
+/* each place in its logo-dot colour; its area lights up while you're in it */
+.place .zone {
+  fill: var(--c);
+  fill-opacity: 0.08;
+  transition: fill-opacity 0.4s ease;
+}
+
+.place .zone-ring {
   fill: none;
-  stroke: var(--dot-red);
+  stroke: var(--c);
   stroke-width: 2;
-  stroke-dasharray: 6 6;
-  opacity: 0.7;
+  stroke-dasharray: 5 6;
+  opacity: 0.6;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.place .place-dot {
+  fill: var(--c);
+}
+
+.place.is-in .zone {
+  fill-opacity: 0.26;
+}
+
+.place.is-in .zone-ring {
+  opacity: 1;
+  animation: ring 1.6s ease-out infinite;
+}
+
+@keyframes ring {
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.25); opacity: 0; }
 }
 
 .place-label rect {
-  fill: rgba(255, 255, 255, 0.1);
+  fill: rgba(255, 255, 255, 0.12);
+  transition: fill 0.3s ease;
 }
 
 .place-label text {
   fill: var(--white);
-  font: 600 13px 'Open Sans', sans-serif;
+  font: 600 12px 'Open Sans', sans-serif;
 }
 
-.walker {
-  animation: walk 9s infinite;
+.place.is-in .place-label rect {
+  fill: var(--c);
+}
+
+.place.is-in .place-label text {
+  fill: var(--blue-1000);
 }
 
 .walker-dot {
-  fill: var(--teal);
+  fill: var(--mint);
   stroke: var(--white);
   stroke-width: 3;
 }
 
 .walker-pulse {
-  fill: var(--teal);
+  fill: var(--mint);
   opacity: 0.3;
   transform-box: fill-box;
   transform-origin: center;
   animation: pulse 1.8s ease-out infinite;
 }
 
-/* One 9s loop. The dot walks into the area (crosses its edge at ~21%), stays, walks out (crosses it
-   at ~67%) and fades before starting again. The area lights up while it's inside, and each
-   notification shows right after the crossing it belongs to. */
-@keyframes walk {
-  0% { transform: translate(60px, 340px); opacity: 0; }
-  4% { opacity: 1; }
-  30% { transform: translate(236px, 214px); }
-  55% { transform: translate(236px, 214px); }
-  85% { transform: translate(430px, 60px); opacity: 1; }
-  92%, 100% { transform: translate(430px, 60px); opacity: 0; }
+/* a little bounce while walking */
+.walker.is-walking .walker-dot {
+  animation: bob 0.5s ease-in-out infinite alternate;
 }
 
-@keyframes zone {
-  0%, 20% { fill-opacity: 0.1; }
-  24%, 64% { fill-opacity: 0.28; }
-  69%, 100% { fill-opacity: 0.1; }
+@keyframes bob {
+  to { transform: translateY(-2px); }
 }
 
 @keyframes pulse {
@@ -350,40 +385,101 @@ summary:focus-visible {
   to { transform: scale(1.6); opacity: 0; }
 }
 
-.toast {
+/* the channel list, hanging off the map's left edge */
+.channels {
   position: absolute;
-  left: 50%;
-  bottom: 24px;
+  left: -28px;
+  bottom: 36px;
+  width: 176px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--white);
+  box-shadow: 0 16px 40px rgba(4, 10, 24, 0.35);
+}
+
+.channels-title {
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+}
+
+.channels-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ch {
+  font-size: 14px;
+  line-height: 26px;
+  color: #666;
+  overflow: hidden;
+}
+
+/* place channels slide in, highlighted, then settle; leaving, they fold away */
+.ch--place {
+  max-height: 0;
+  opacity: 0;
+  transform: translateX(-8px);
+  font-weight: 700;
+  color: var(--blue-900);
+  transition: max-height 0.35s ease, opacity 0.35s ease, transform 0.35s ease, background-color 1.2s ease;
+}
+
+.ch--place.is-in {
+  max-height: 26px;
+  opacity: 1;
+  transform: none;
+  margin: 0 -8px;
+  padding: 0 8px;
+  border-radius: 6px;
+  animation: new-channel 1.6s ease;
+}
+
+.ch--place.is-out {
+  max-height: 0;
+  opacity: 0;
+}
+
+@keyframes new-channel {
+  0%, 40% { background: rgba(48, 217, 164, 0.3); }
+  100% { background: transparent; }
+}
+
+/* notifications hang off the map's bottom edge, newest last */
+.toasts {
+  position: absolute;
+  right: 20px;
+  bottom: -28px;
+  display: grid;
+  width: min(280px, calc(100% - 200px));
+}
+
+.toast {
+  grid-area: 1 / 1;
   display: flex;
   align-items: center;
   gap: 12px;
-  width: min(320px, calc(100% - 32px));
-  padding: 12px 14px;
+  padding: 10px 14px;
   border-radius: 14px;
   background: var(--white);
-  box-shadow: 0 16px 40px rgba(10, 12, 30, 0.35);
+  box-shadow: 0 16px 40px rgba(4, 10, 24, 0.35);
   opacity: 0;
-  transform: translate(-50%, 12px);
+  transform: translateY(10px) scale(0.98);
+  transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1.2);
 }
 
-.toast--join {
-  animation: toast-join 9s infinite;
+.toast.is-shown {
+  opacity: 1;
+  transform: none;
 }
 
-.toast--leave {
-  animation: toast-leave 9s infinite;
-}
-
-@keyframes toast-join {
-  0%, 21% { opacity: 0; transform: translate(-50%, 12px); }
-  24%, 50% { opacity: 1; transform: translate(-50%, 0); }
-  54%, 100% { opacity: 0; transform: translate(-50%, 12px); }
-}
-
-@keyframes toast-leave {
-  0%, 68% { opacity: 0; transform: translate(-50%, 12px); }
-  71%, 90% { opacity: 1; transform: translate(-50%, 0); }
-  94%, 100% { opacity: 0; transform: translate(-50%, 12px); }
+.toast.is-leaving {
+  opacity: 0;
+  transform: translateY(-6px);
 }
 
 .toast-icon img {
@@ -398,9 +494,9 @@ summary:focus-visible {
 }
 
 .toast-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
-  color: var(--navy-deep);
+  color: var(--blue-900);
 }
 
 .toast-time {
@@ -410,7 +506,7 @@ summary:focus-visible {
 }
 
 .toast-text {
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
 }
 
@@ -418,7 +514,7 @@ summary:focus-visible {
 
 .how {
   padding: 88px 0;
-  background: var(--green-600);
+  background: var(--blue-600);
   text-align: center;
 }
 
@@ -448,7 +544,7 @@ summary:focus-visible {
   left: calc(50% + 56px);
   width: calc(100% - 112px + 32px);
   height: 2px;
-  background: rgba(50, 26, 88, 0.3);
+  background: rgba(255, 255, 255, 0.35);
 }
 
 .step-num {
@@ -457,8 +553,8 @@ summary:focus-visible {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--navy-deep);
-  color: var(--white);
+  background: var(--white);
+  color: var(--blue-600);
   font-size: 14px;
   font-weight: 800;
 }
@@ -468,9 +564,14 @@ summary:focus-visible {
   height: 56px;
 }
 
+.how h2,
+.step h3 {
+  color: var(--white);
+}
+
 .step p {
   max-width: 18em;
-  color: var(--navy-deep);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* ---- the app ---- */
@@ -516,8 +617,8 @@ summary:focus-visible {
   padding: 28px;
   border-radius: var(--radius);
   background: var(--white);
-  border: 1px solid var(--purple-100);
-  box-shadow: 0 10px 30px rgba(50, 26, 88, 0.06);
+  border: 1px solid var(--blue-100);
+  box-shadow: 0 10px 30px rgba(23, 46, 83, 0.06);
 }
 
 .card strong {
@@ -564,7 +665,7 @@ summary:focus-visible {
 }
 
 details {
-  border-bottom: 1px solid var(--purple-100);
+  border-bottom: 1px solid var(--blue-100);
 }
 
 summary {
@@ -624,7 +725,7 @@ details p {
 
 .site-footer {
   padding: 40px 0;
-  background: var(--navy-deep);
+  background: var(--blue-1000);
   color: var(--on-navy);
   font-size: 15px;
 }
@@ -653,6 +754,100 @@ details p {
   text-decoration: underline;
 }
 
+/* ---- motion ---- */
+
+/* the hero comes in line by line */
+.hero-copy > * {
+  animation: rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.hero-copy > :nth-child(2) { animation-delay: 0.08s; }
+.hero-copy > :nth-child(3) { animation-delay: 0.16s; }
+.hero-copy > :nth-child(4) { animation-delay: 0.24s; }
+.hero-copy > :nth-child(5) { animation-delay: 0.32s; }
+
+.demo {
+  animation: rise 1s 0.2s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(20px); }
+}
+
+.lead .chip {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.lead .chip:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* steps: the numbers pop in, the lines between them draw across */
+.step-num {
+  transition: transform 0.5s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.js .step:not(.is-visible) .step-num {
+  transform: scale(0);
+}
+
+.step:not(:last-child)::after {
+  transform-origin: left;
+  transition: transform 0.7s 0.3s ease;
+}
+
+.js .step:not(.is-visible)::after {
+  transform: scaleX(0);
+}
+
+.step img {
+  transition: transform 0.3s ease;
+}
+
+.step:hover img {
+  transform: translateY(-4px) rotate(-4deg);
+}
+
+/* the phones float */
+.app-shot img {
+  animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+  50% { transform: translateY(-10px); }
+}
+
+/* cards lift on hover */
+.card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.6s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(23, 46, 83, 0.12);
+}
+
+.card .chip {
+  transition: background-color 0.25s ease;
+}
+
+.card:hover .chip {
+  background: var(--blue-600);
+}
+
+summary {
+  transition: color 0.2s ease;
+}
+
+summary:hover {
+  color: var(--blue-600);
+}
+
+details[open] p {
+  animation: rise 0.35s ease both;
+}
+
 /* ---- scroll reveal (only with JavaScript, never with "reduce motion") ---- */
 
 .js .reveal {
@@ -674,34 +869,22 @@ details p {
 /* ---- reduce motion: the animation stops on "you joined #office" ---- */
 
 @media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
   html {
     scroll-behavior: auto;
   }
 
-  .walker,
-  .walker-pulse,
-  .zone,
-  .toast {
-    animation: none;
-  }
-
-  .walker {
-    transform: translate(236px, 214px);
-  }
-
-  .zone {
-    fill-opacity: 0.28;
-  }
-
-  .toast--join {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
-
-  .js .reveal {
+  .js .reveal,
+  .js .step:not(.is-visible) .step-num,
+  .js .step:not(.is-visible)::after {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 }
 
@@ -727,6 +910,29 @@ details p {
 }
 
 @media (max-width: 640px) {
+  .channels {
+    left: 12px;
+    bottom: 12px;
+    width: 140px;
+    padding: 10px 12px;
+  }
+
+  .toasts {
+    right: 12px;
+    bottom: -24px;
+    width: calc(100% - 172px);
+  }
+
+  .toast {
+    padding: 8px 10px;
+    gap: 8px;
+  }
+
+  .toast-icon img {
+    width: 24px;
+    height: 24px;
+  }
+
   section {
     padding: 72px 0;
   }
